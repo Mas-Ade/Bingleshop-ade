@@ -3,6 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tb_items', {
+
       id_item: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -21,10 +22,10 @@ module.exports = {
         allowNull: true
       },
       harga: {
-        type: Sequelize.DOUBLE,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-  stock: {
+      stock: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

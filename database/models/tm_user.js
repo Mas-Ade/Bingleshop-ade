@@ -1,51 +1,34 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require('./sequelize')
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Tm_users extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Tm_users.hasMany (model.Tb_item,{foreignKey:'id_user'}),
+      Tm_users.hasMany (model.Tb_cart,{foreignKey:'id_user'}),
+      Tm_users.hasMany (model.Tb_order,{foreignKey:'id_user'}),
+      Tm_users.hasMany (model.Tb_status_order,{foreignKey:'id_user'})
+    }
+  }
 
-class Tm_user extends Model {
-}
-
-Tm_user.init(
-  {
-    // Attribute
-    id_user: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    nama_user: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    noreg_user: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    email: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    address: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
-    no_telp: {
-      type: Sequelize.INTEGER,
-      allowNull: false
-    },
-  },
-  {
-    sequelize: sequelize,
-    timestamps: true,
-    paranoid: true,
-    underscored: true,
-    deletedAt: 'deleted_at',
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
-  },
-)
-
-module.exports = Tm_user
+  Tm_users.init({
+    id_user: DataTypes.INTEGER,
+    nama_user: DataTypes.STRING,
+    noreg_user: DataTypes.STRING,
+    password: DataTypes.STRING,
+    email: DataTypes.STRING,
+    address: DataTypes.STRING,
+    no_telp: DataTypes.INTEGER
+  
+  }, {
+    sequelize,
+    modelName: 'tm_users',
+  });
+  return Tm_users;
+};

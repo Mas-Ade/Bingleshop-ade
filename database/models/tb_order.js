@@ -3,21 +3,28 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class tb_order extends Model {
+  class Tb_order extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Tb_cart.hasOne (model.Tb_status_order,{foreignKey:'id_order'})
     }
   }
-  tb_order.init({
-    id_order: DataTypes.INTEGER
+  Tb_order.init({
+    id_order: DataTypes.INTEGER,
+    id_cart: DataTypes.INTEGER,
+    id_user: DataTypes.INTEGER,
+    id_cart: DataTypes.INTEGER,
+    total_item: DataTypes.INTEGER,
+    total_harga: DataTypes.DOUBLE,
+    code_payment: DataTypes.STRING,
+
   }, {
     sequelize,
-    modelName: 'tb_order',
+    modelName: 'tb_orders',
   });
-  return tb_order;
+  return Tb_order;
 };

@@ -3,21 +3,44 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tb_status_orders', {
-      id: {
+      id_status_order: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_status_order: {
-        type: Sequelize.INTEGER
+      id_order: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      id_user: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
-      updatedAt: {
-        allowNull: false,
+      payment_status: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      delivery_date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      received_date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+
+
+       //Default API
+       created_at: {
+        type: Sequelize.DATE,
+        defaultValue: Date.now()
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        defaultValue: Date.now()
+      },
+      deleted_at: {
         type: Sequelize.DATE
       }
     });
