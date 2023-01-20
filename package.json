@@ -1,0 +1,22 @@
+{
+  "name": "putraapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api-server": "nodemon index.js",
+    "dev": "nodemon indexDev.js",
+    "db:migrate-generate": "npx sequelize migration:create --name ",
+    "db:migrate": "npx sequelize-cli db:migrate"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.5.2"
+  }
+}
