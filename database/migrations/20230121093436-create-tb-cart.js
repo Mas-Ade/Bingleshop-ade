@@ -10,11 +10,21 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
-        allowNull: true
+        allowNull: false,
+        references : {
+          model: "tm_users",
+          key: "id_user",
+          as: "id_user"
+        }
       },
       id_item: {
         type: Sequelize.INTEGER,
-        allowNull: true
+        allowNull: false,
+        references : {
+          model: "tb_items",
+          key: "id_item",
+          as: "id_item"
+        }
       },
       total_item: {
         type: Sequelize.INTEGER,

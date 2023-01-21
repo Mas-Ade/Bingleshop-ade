@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Tb_status_order extends Model {
+  class tb_status_order extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,16 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_status_order.init({
-    id_status_order: DataTypes.INTEGER,
-    id_order: DataTypes.INTEGER,
-    id_user: DataTypes.INTEGER,
-    payment_status: DataTypes.BOOLEAN,
-    delivery_date: DataTypes.DATE,
-    received_date: DataTypes.DATE,
-
+    id_status_order: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'tb_status_orders',
+    modelName: 'tb_status_order',
   });
-  return Tb_status_order;
+  return tb_status_order;
 };

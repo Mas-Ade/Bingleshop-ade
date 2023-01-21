@@ -2,35 +2,36 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_status_orders', {
-      id_status_order: {
+    await queryInterface.createTable('tb_orders', {
+      id_order: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_order: {
+      id_cart: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references : {
+          model: "tb_carts",
+          key: "id_cart",
+          as: "id_cart"
+        }
       },
       id_user: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        references : {
+          model: "tm_users",
+          key: "id_user",
+          as: "id_user"
+        }
+      },
+      code_payment: {
+        type: Sequelize.STRING,
         allowNull: false
       },
-      payment_status: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      delivery_date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      received_date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-
-
+      
        //Default API
        created_at: {
         type: Sequelize.DATE,
@@ -43,9 +44,10 @@ module.exports = {
       deleted_at: {
         type: Sequelize.DATE
       }
+      
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_status_orders');
+    await queryInterface.dropTable('tb_orders');
   }
 };

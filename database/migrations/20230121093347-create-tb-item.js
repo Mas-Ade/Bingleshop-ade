@@ -11,7 +11,12 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references : {
+          model: "tm_users",
+          key: "id_user",
+          as: "id_user"
+        }
       },
       code_item: {
         type: Sequelize.STRING,
