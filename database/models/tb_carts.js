@@ -7,12 +7,12 @@ class Tb_carts extends Model {
 Tb_carts.init(
   {
     id_cart: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
       id_user: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references : {
           model: "tm_users",
@@ -21,7 +21,7 @@ Tb_carts.init(
         }
       },
       id_item: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references : {
           model: "tb_items",
@@ -30,11 +30,11 @@ Tb_carts.init(
         }
       },
       total_item: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       total_harga: {
-        type: Sequelize.DOUBLE,
+        type: DataTypes.DOUBLE,
         allowNull: false
       },
   },

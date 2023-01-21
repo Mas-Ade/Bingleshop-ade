@@ -10,10 +10,10 @@ tb_orders.init(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     id_order: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references : {
         model: "tb_orders",
@@ -22,7 +22,7 @@ tb_orders.init(
       }
     },
     id_user: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references : {
         model: "tm_users",
@@ -31,15 +31,15 @@ tb_orders.init(
       }
     },
     payment_status: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false
     },
     delivery_date: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false
     },
     received_date: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false
     },
 

@@ -4,14 +4,14 @@ const express = require('express')
 // inisialisasi app
 const app = express()
 
-// import Router Item
-// const itemRouter = require('./routers/items.router')
+//import Router Item
+const userRouter = require('./routers/user.router')
 
 // Middleware: request -> middleware -> controller/handler
 app.use(express.json()) // contoh fungsi express.json()
 
-// Router
-// app.use('/v1', itemRouter)
+//Router
+app.use('/v1', userRouter)
 
 
 app.use((err, req, res, next) => {
