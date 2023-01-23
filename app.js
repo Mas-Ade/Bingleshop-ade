@@ -14,15 +14,15 @@ app.use(express.json()) // contoh fungsi express.json()
 app.use('/v1', userRouter)
 
 
-app.use((err, req, res, next) => {
-    console.log(err)
+// app.use((err, req, res, next) => {
+//     console.log(err)
 
-    return res.status(err.status).json({
-        status: false,
-        data: {},
-        error: err.error
-    })
-})
+//     return res.status(err.status).json({
+//         status: false,
+//         data: {},
+//         error: err.error
+//     })
+// })
 
 module.exports = app
 
