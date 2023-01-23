@@ -8,8 +8,8 @@ const {UserController} = require('../controllers/user.controller')
 const userController = new UserController()
 
 // route untuk end point user
-router.get('/datauser', userController.getUser)
-router.get('/cekuser', userController.findUserbyId)
+router.get('/user/datauser', userController.getUser)
+router.get('/user/cekuser/:id', userController.findUserbyId)
 router.post('/user/registrasi', userController.insertUser)
 router.delete('/user/delete', userController.deleteUser)
 

@@ -11,7 +11,7 @@ module.exports = {
       },
       id_cart: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tb_carts",
           key: "id_cart",
@@ -20,7 +20,7 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tm_users",
           key: "id_user",
@@ -29,7 +29,7 @@ module.exports = {
       },
       code_payment: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       
        //Default API

@@ -1,7 +1,10 @@
 class ErrorResponse {
     constructor(status, error) {
-        this.status = status
-        this.error = error
+        return res.status(status).json({
+            status: true,
+            data: data,
+            error: error
+        })
     }
 }
 

@@ -1,13 +1,17 @@
+
 // import router module
 const router = require('express').Router()
 // import itemController class
-const {UserController} = require('../controllers/user.controller')
+const {ItemController} = require('../controllers/item.controller')
 
 // declare new class
-const userController = new UserController()
+const itemController = new ItemController()
 
-// route untuk end point
-router.get('/v1/items', userController.getItems)
-router.post('/v1/items', itemsController.insertItem)
+// route untuk end point user
+router.get('/item/dataitem', itemController.getItem)
+router.get('/item/cekuser/:id', itemController.findItembyId)
+router.post('/item/additem', itemController.insertItem)
+router.delete('/item/delete', itemController.deleteItem)
+
 
 module.exports = router

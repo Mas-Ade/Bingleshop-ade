@@ -11,7 +11,7 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tm_users",
           key: "id_user",
@@ -28,11 +28,11 @@ module.exports = {
       },
       harga: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       stock: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
 
 

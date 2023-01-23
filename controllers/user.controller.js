@@ -20,8 +20,9 @@ class UserController {
         return new Response(res, 200, dataUser)
     }
     
-    insertUser (req, res) {
-            createUser = User.create({
+    async insertUser (req, res) {
+        try{
+            const createUser = await User.create({
                 nama_user: req.body.nama_user,
                 noreg_user: req.body.noreg_user,
                 email: req.body.email,
@@ -29,26 +30,30 @@ class UserController {
                 address: req.body.address,
                 no_telp: req.body.no_telp  
             })
-            .then((result) => {
-                res.status(200).json({
-                    data: result,
-                    message: "Registrasi berhasil"
-                })
-            }).catch((error) => {
-                res.status(500).json({
-                    message: error.message
-
-                })
-            })
-        } 
+            // pakai format standard =================================
+            // .then((result) => {
+            //  res.status(200).json({
+            //       data: result,
+            //       message: "Registrasi berhasil"
+            //     })
+            // }).catch((error) => {
+            //     res.status(500).json({
+            //         message: error.message
+            //     })
+            // })
+            return new Response(res, 200, createUser)
+        } catch(createUser) {
+            return new ErrorResponse(res,500, createUser)
+            }
+    }
 
         findUserbyId (req, res) {
-            const id= req.param.id_user
+
+            const id = req.params.id_user
             createUser = User.findByPk(id)
             .then((result) => {
                 res.status(200).json({
                     
-                    message: `penacarian data dari ${id}`,
                     data: result
                 })
             }).catch((error) => {
@@ -72,9 +77,6 @@ class UserController {
             })
         })
     }
-
-
-
     }
 
 

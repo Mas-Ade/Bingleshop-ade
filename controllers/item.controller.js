@@ -2,50 +2,67 @@
 const ErrorResponse = require("../helpers/error.helper")
 // import Response OK  API
 const Response = require("../helpers/response.helper")
+// import Product class dari model dari index.js modely
+const { Item } = require('../database/models')
 
-// import Product class dari model dari index.js model
-const { Product } = require('../database/models')
 
-class ItemsController {
-    // SEND GET REQUEST TO HTTP
-    async getItems(req, res, next) {
-        // const { page = '1', limit = '3'} = req.query
-        // const pageInt = Number(page)
-        // const limitInt = Number(limit)
-        // const offset = (pageInt - 1) * limitInt
+class ItemController {
+    // SEND GET REQUEST to see data table in tm_user
+    async getItem(req, res) {
 
-        const data = await Product.findAll({
-            attributes: ['id', 'name', 'price', 'stock', 'sku'],
-            limit: limitInt,
-            offset: offset
+        const dataItem = await Item.findAll({
+            attributes: ['id_item', 'id_user', 'code_item', 'nama_item', 'harga','stock'],
         })
-
-        return new Response(res, 200, data)
+            return new Response(res,200,dataItem)
     }
     
-    //
-    insertItem(req, res, next) {
+    insertItem (req, res) {
         try {
-            // console.log(req.body)       // request body
-            // console.log(req.params)     // request url params
-            // console.log(req.query)      // request query param
-            // console.log(req.headers)    // request header
-        
-            // logic insert ke db
-
-            const data = {
-                item_id: 10,
-                item_name: req.body.item_name
-            }
-        
-            return new Response(res, 201, data)
-        } catch (error) {
-            next(error)
+            const createItem = Item.create({
+                code_item: req.body.code_item,
+                nama_item: req.body.nama_item,
+                harga: req.body.harga,
+                stock: req.body.stock,
+            })
+            return new Response(res,200,this.insertItem)  
+        } catch(err) {
+        return new ErrorResponse(res,500, err)
         }
     }
-}
+
+        findItembyId (req, res) {
+
+            const id = req.params.id_item
+            createUser = User.findByPk(id)
+            .then((result) => {
+                res.status(200).json({
+                    
+                    data: result
+                })
+            }).catch((error) => {
+                res.status(500).json({
+                    message: error.message
+
+                })
+            })
+        } 
+
+    deleteItem(res,req) {
+
+        const id = User.req.body
+        deleteUserbyId = User.destroy({where: {id_user: 6}}).then((result) => {
+            res.status(200).json({
+                message: `berhasil menghapus data id dari ${id_user}`
+            })
+        }).catch((err) => {
+            res.status(500).json({
+                message: err.message
+            })
+        })
+    }
+    }
 
 
 module.exports = {
-    ItemsController
+    ItemController
 }

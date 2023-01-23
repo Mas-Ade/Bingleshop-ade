@@ -12,7 +12,7 @@ module.exports = {
       },
       id_order: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tb_orders",
           key: "id_order",
@@ -21,7 +21,7 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tm_users",
           key: "id_user",
@@ -30,15 +30,15 @@ module.exports = {
       },
       payment_status: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: true
       },
       delivery_date: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       received_date: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
 
 

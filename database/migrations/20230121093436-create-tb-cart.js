@@ -10,7 +10,7 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tm_users",
           key: "id_user",
@@ -19,7 +19,7 @@ module.exports = {
       },
       id_item: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tb_items",
           key: "id_item",
@@ -28,11 +28,11 @@ module.exports = {
       },
       total_item: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       total_harga: {
         type: Sequelize.DOUBLE,
-        allowNull: false
+        allowNull: true
       },
 
       //Default API
