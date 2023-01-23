@@ -3,30 +3,28 @@ const ErrorResponse = require("../helpers/error.helper")
 // import Response OK  API
 const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
-const { Item } = require('../database/models')
+const { Cart } = require('../database/models')
 
 
-class ItemController {
+class CartController {
     // SEND GET REQUEST to see data table in tm_user
-    async getItem(req, res) {
+    async getCart(req, res) {
 
-        const dataItem = await Item.findAll({
-            attributes: ['id_item', 'id_user', 'code_item', 'nama_item', 'harga','stock'],
-            include: 'tm_users'
+        const dataCart = await Cart.findAll({
+            attributes: ['id_cart', 'id_user', 'id_item', 'total_item', 'total_harga']
         })
-            return new Response(res,200,dataItem)
+            return new Response(res,200,dataCart)
     }
     
-    insertItem (req, res) {
+    insertCart (req, res) {
         try {
-            const createItem = Item.create({
-                code_item: req.body.code_item,
-                nama_item: req.body.nama_item,
-                harga: req.body.harga,
-                stock: req.body.stock,
+            const createItem = Cart.create({
+                id_item: req.body.id_item,
+                total_item: req.body.total_item,
+                total_harga: req.body.total_harga
             }).then((result) => {
                 res.status(200).json({
-                    message: "menu risol berhasil diinput !!",
+                    message: "pesanan sudah masuk list keranjang anda !! ",
                     data: result
                 }).catch((err)=> {
                     res.status(500).json({
@@ -40,7 +38,7 @@ class ItemController {
         }
     }
 
-        findItembyId (req, res) {
+        findCartbyId (req, res) {
 
             const id = req.params.id_item
             createUser = User.findByPk(id)
@@ -57,7 +55,7 @@ class ItemController {
             })
         } 
 
-    deleteItem(res,req) {
+    deleteCart(res,req) {
 
         const id = User.req.body
         deleteUserbyId = User.destroy({where: {id_user: 6}}).then((result) => {
@@ -74,5 +72,5 @@ class ItemController {
 
 
 module.exports = {
-    ItemController
+    CartController
 }

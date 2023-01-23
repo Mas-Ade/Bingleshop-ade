@@ -13,7 +13,7 @@ Tb_items.init(
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: 'id_user'
     },
     code_item: {

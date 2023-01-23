@@ -3,10 +3,10 @@ const ErrorResponse = require("../helpers/error.helper")
 // import Response OK  API
 const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
-const { Item } = require('../database/models')
+const { Order } = require('../database/models')
 
 
-class ItemController {
+class OrderController {
     // SEND GET REQUEST to see data table in tm_user
     async getItem(req, res) {
 
@@ -74,5 +74,5 @@ class ItemController {
 
 
 module.exports = {
-    ItemController
+    OrderController
 }

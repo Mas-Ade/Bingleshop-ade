@@ -13,7 +13,7 @@ Tb_carts.init(
       },
       id_user: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tm_users",
           key: "id_user",
@@ -22,7 +22,7 @@ Tb_carts.init(
       },
       id_item: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references : {
           model: "tb_items",
           key: "id_item",
