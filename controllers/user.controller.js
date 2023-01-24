@@ -6,79 +6,61 @@ const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js model
 const { User } = require('../database/models')
 
-
-
+// Class User
 class UserController {
-    // SEND GET REQUEST to see data table in tm_user
-    async getUser(req, res) {
 
-        const dataUser = await User.findAll({
-            attributes: ['id_user', 'nama_user', 'noreg_user', 'password', 'email','address','no_telp'],
-            // limit: limitInt,
-            // offset: offset
-        })
+// method untuk akses lihat semua data user
+    async getUser(req, res, next) {
+        try{
+            const dataUser = await User.findAll({
+            attributes: ['id_user', 'nama_user', 'noreg_user', 'password', 'email','address','no_telp']
+            })
         return new Response(res, 200, dataUser)
-    }
+        }
+        catch(error){
+        next(error)
+        }}
     
-    async insertUser (req, res) {
+// method untuk registrasi data user 
+    async insertUser (req, res, next) {
         try{
             const createUser = await User.create({
-                nama_user: req.body.nama_user,
-                noreg_user: req.body.noreg_user,
-                email: req.body.email,
-                password: req.body.password,
-                address: req.body.address,
-                no_telp: req.body.no_telp  
+            nama_user: req.body.nama_user,
+            noreg_user: req.body.noreg_user,
+            email: req.body.email,
+            password: req.body.password,
+            address: req.body.address,
+            no_telp: req.body.no_telp  
             })
-            // pakai format standard =================================
-            // .then((result) => {
-            //  res.status(200).json({
-            //       data: result,
-            //       message: "Registrasi berhasil"
-            //     })
-            // }).catch((error) => {
-            //     res.status(500).json({
-            //         message: error.message
-            //     })
-            // })
-            return new Response(res, 200, createUser)
-        } catch(createUser) {
-            return new ErrorResponse(res,500, createUser)
-            }
-    }
+        return new Response(res, 200, createUser)
+        }   
+        catch(error) {
+            next(error)
+            }}
 
-        findUserbyId (req, res) {
+// method untuk cek data user by id_user
+        async findUserbyId (req, res, next) {
+        try {
+            const id = req.body.id_user
+            const findUser = await User.findByPk(id)
+        return new Response(res,200,findUser)
+        }   
+        catch(error){
+            next(error)
+        }} 
 
-            const id = req.params.id_user
-            createUser = User.findByPk(id)
-            .then((result) => {
-                res.status(200).json({
-                    
-                    data: result
-                })
-            }).catch((error) => {
-                res.status(500).json({
-                    message: error.message
-
-                })
-            })
-        } 
-
-    deleteUser(res,req) {
-
-        const id = User.req.body
-        deleteUserbyId = User.destroy({where: {id_user: 6}}).then((result) => {
-            res.status(200).json({
-                message: `berhasil menghapus data id dari ${id_user}`
-            })
-        }).catch((err) => {
-            res.status(500).json({
-                message: err.message
-            })
-        })
-    }
-    }
-
+// method untuk delete data user
+    async deleteUser(res,req, next) {
+        try {
+            const id = User.req.body
+            const deleteUserbyId = await User.destroy({where: {id_user: 6}})
+        return new Response (res, 201, deleteUserbyId)
+        }
+        catch(error){
+            next(error)
+        }}
+        
+}
 
 module.exports = {
     UserController

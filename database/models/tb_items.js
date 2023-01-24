@@ -26,11 +26,11 @@ Tb_items.init(
     },
     harga: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     stock: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
   },
   {

@@ -14,17 +14,17 @@ tb_orders.init(
     },
     id_cart: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "id_cart"
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       field: "id_user"
     },
     code_payment: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
   },
   {

@@ -8,13 +8,16 @@ const { StatusOrder } = require('../database/models')
 
 class StatusOrderController {
     // SEND GET REQUEST to see data table in tm_user
-    async getItem(req, res) {
-
+    async getItem(req, res,next) {
+        try{
         const dataItem = await Item.findAll({
-            attributes: ['id_item', 'id_user', 'code_item', 'nama_item', 'harga','stock'],
+            attributes: ['id_status_order', 'id_order', 'id_user', 'payment_status', 'delivery_date','received_Date'],
             include: 'tm_users'
         })
             return new Response(res,200,dataItem)
+        }catch(error) {
+            next(error)
+        }
     }
     
     insertItem (req, res) {

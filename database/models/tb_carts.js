@@ -31,11 +31,11 @@ Tb_carts.init(
       },
       total_item: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       total_harga: {
         type: DataTypes.DOUBLE,
-        allowNull: false
+        allowNull: true
       },
   },
   {

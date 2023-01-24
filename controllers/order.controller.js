@@ -5,70 +5,61 @@ const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
 const { Order } = require('../database/models')
 
-
+// Class Order
 class OrderController {
-    // SEND GET REQUEST to see data table in tm_user
-    async getItem(req, res) {
 
-        const dataItem = await Item.findAll({
-            attributes: ['id_item', 'id_user', 'code_item', 'nama_item', 'harga','stock'],
-            include: 'tm_users'
+// method untuk akses data order
+    async getOrder(req, res, next) {
+        try{
+        const dataItem = await Order.findAll({
+            attributes: ['id_order', 'id_cart', 'id_user', 'code_payment'],
+            include: ['tm_users','id_cart']
         })
-            return new Response(res,200,dataItem)
-    }
+        return new Response(res,200,dataItem)
+        }
+        catch(error){
+            next(error)
+        }}
     
-    insertItem (req, res) {
+// method untuk create data order
+    async insertOrder (req, res) {
         try {
-            const createItem = Item.create({
-                code_item: req.body.code_item,
-                nama_item: req.body.nama_item,
-                harga: req.body.harga,
-                stock: req.body.stock,
-            }).then((result) => {
-                res.status(200).json({
-                    message: "menu risol berhasil diinput !!",
-                    data: result
-                }).catch((err)=> {
-                    res.status(500).json({
-                        message: err.message
-                    })
-                })
+            const createOrder = await Order.create({
+                id_cart: req.body.id_cart,
+                id_user: req.body.id_user,
+                code_payment: req.body.code_payment,
             })
-           
-        } catch(err) {
-        return new ErrorResponse(res,500, err)
+        return new Response(res, 200, createOrder )
+        } 
+        catch(error) {
+            next(error)
         }
     }
 
-        findItembyId (req, res) {
-
-            const id = req.params.id_item
-            createUser = User.findByPk(id)
-            .then((result) => {
-                res.status(200).json({
-                    
-                    data: result
-                })
-            }).catch((error) => {
-                res.status(500).json({
-                    message: error.message
-
-                })
-            })
+// method untuk create data order
+    async findOrderbyId (req, res,next ) {
+        try{
+            const id = req.params.id_order
+            createOrder = User.findByPk(id)
+        return new Response (res,200, createOrder)
         } 
+        catch{
+            next(error)
+        } 
+        }
 
-    deleteItem(res,req) {
+    async deleteOrder(res,req, next) {
+        try{
 
-        const id = User.req.body
-        deleteUserbyId = User.destroy({where: {id_user: 6}}).then((result) => {
-            res.status(200).json({
-                message: `berhasil menghapus data id dari ${id_user}`
-            })
-        }).catch((err) => {
-            res.status(500).json({
-                message: err.message
-            })
-        })
+            const id = req.body.id_order
+            deleteUserbyId = await User.destroy({where: {id_order: 6}})
+        return new Response(res, 200, deleteUserbyId)
+        }
+        catch(error){
+            next(error)
+        }
+
+        
     }
     }
 

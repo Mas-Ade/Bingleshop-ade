@@ -14,7 +14,7 @@ tb_orders.init(
     },
     id_order: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references : {
         model: "tb_orders",
         key: "id_order",
@@ -23,7 +23,7 @@ tb_orders.init(
     },
     id_user: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references : {
         model: "tm_users",
         key: "id_user",
@@ -32,15 +32,15 @@ tb_orders.init(
     },
     payment_status: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: true
     },
     delivery_date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     },
     received_date: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     },
 
   },

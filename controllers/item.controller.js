@@ -5,71 +5,59 @@ const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
 const { Item } = require('../database/models')
 
-
+// Class Item
 class ItemController {
-    // SEND GET REQUEST to see data table in tm_user
-    async getItem(req, res) {
 
-        const dataItem = await Item.findAll({
+// method untuk akses lihat semua data Item
+    async getItem(req, res, next) {
+        try{
+            const dataItem = await Item.findAll({
             attributes: ['id_item', 'id_user', 'code_item', 'nama_item', 'harga','stock'],
-            include: 'tm_users'
+            // include: 'tm_users'
         })
-            return new Response(res,200,dataItem)
-    }
-    
-    insertItem (req, res) {
+        return new Response(res,200,dataItem)
+        }
+        catch(error){
+        next(error)
+        }}
+        
+// method untuk akses Insert data item(admin)/ buat pesanan(user)
+    async insertItem (req, res, next) {
         try {
-            const createItem = Item.create({
+            const createItem = await Item.create({
                 code_item: req.body.code_item,
                 nama_item: req.body.nama_item,
                 harga: req.body.harga,
                 stock: req.body.stock,
-            }).then((result) => {
-                res.status(200).json({
-                    message: "menu risol berhasil diinput !!",
-                    data: result
-                }).catch((err)=> {
-                    res.status(500).json({
-                        message: err.message
-                    })
-                })
             })
-           
-        } catch(err) {
-        return new ErrorResponse(res,500, err)
-        }
-    }
+            return new Response(res, 200, createItem)
+        } catch(error) {
+        next(error)
+        }}
 
-        findItembyId (req, res) {
-
-            const id = req.params.id_item
-            createUser = User.findByPk(id)
-            .then((result) => {
-                res.status(200).json({
-                    
-                    data: result
-                })
-            }).catch((error) => {
-                res.status(500).json({
-                    message: error.message
-
-                })
-            })
+// method untuk akses data item by Id
+    async findItembyId (req, res, next) {
+        try{
+                const id = req.body.id_item
+                const findItem = await User.findByPk(id)
+            return new Response(res, 200, findItem)
         } 
+        catch(error) {
+            next(error)
+        }}
 
-    deleteItem(res,req) {
-
-        const id = User.req.body
-        deleteUserbyId = User.destroy({where: {id_user: 6}}).then((result) => {
-            res.status(200).json({
-                message: `berhasil menghapus data id dari ${id_user}`
-            })
-        }).catch((err) => {
-            res.status(500).json({
-                message: err.message
-            })
-        })
+// method untuk delete data item by Id        
+    async deleteItem(res, req, next) {
+        try{
+                const id = req.body.id_item
+                const deleteUserbyId = User.destroy({where: {id_user: 6}})
+            return new Response(res, 200, deleteUserbyId )
     }
+    catch(error){
+        next(error)
+    }}
+
+
     }
 
 
