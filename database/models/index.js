@@ -14,12 +14,10 @@ const sequelize = require('./sequelize')
 
 Item.hasMany(User,{
   foreignKey: 'id_user',
-  as: 'tb_items'
 })
 
 User.belongsTo(Item,{
     foreignKey: 'id_user',
-    as: 'tm_users'
 })
 
  // export module user,product dan sequelize
