@@ -8,10 +8,9 @@ const {ItemController} = require('../controllers/item.controller')
 const itemController = new ItemController()
 
 // route untuk end point user
-router.get('/item/dataitem', itemController.getItem)
-router.get('/item/cekitem/:id', itemController.findItembyId)
-router.post('/item/additem', itemController.insertItem)
+router.get('/item/dataitem', itemController.getItem) // works
+router.get('/item/cekitem/:id', itemController.findItembyId) // works
+router.post('/item/additem', itemController.insertItem) // works
 router.delete('/item/delete', itemController.deleteItem)
-
 
 module.exports = router

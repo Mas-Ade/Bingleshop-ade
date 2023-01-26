@@ -14,11 +14,7 @@ Tb_carts.init(
       id_user: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        references : {
-          model: "tm_users",
-          key: "id_user",
-          as: "id_user"
-        }
+        field: 'id_user'
       },
       id_item: {
         type: DataTypes.INTEGER,
@@ -26,8 +22,12 @@ Tb_carts.init(
         references : {
           model: "tb_items",
           key: "id_item",
-          as: "id_item"
+          
         }
+      },
+      status_cart: {
+        type: DataTypes.STRING,
+        allowNull: true
       },
       total_item: {
         type: DataTypes.INTEGER,

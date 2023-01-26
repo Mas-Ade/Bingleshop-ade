@@ -8,9 +8,9 @@ const {CartController} = require('../controllers/cart.controller')
 const cartController = new CartController()
 
 // route untuk end point user
-router.get('/cart/datacart', cartController.getCart)
-router.get('/cart/cekcart/:id', cartController.findCartbyId)
-router.post('/cart/addcart', cartController.insertCart)
+router.get('/cart/datacart', cartController.getCart) //works
+router.get('/cart/cekcart/:id', cartController.findCartbyId) //works
+router.post('/cart/addcart', cartController.insertCart) //works
 router.delete('/cart/delete', cartController.deleteCart)
 
 

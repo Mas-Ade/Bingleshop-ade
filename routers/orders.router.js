@@ -8,9 +8,9 @@ const {OrderController} = require('../controllers/order.controller')
 const orderController = new OrderController()
 
 // route untuk end point user
-router.get('/order/dataorder', orderController.getOrder)
-router.get('/order/cekorder/:id', orderController.findOrderbyId)
-router.post('/order/addorder', orderController.insertOrder)
+router.get('/order/dataorder', orderController.getOrder) // works
+router.get('/order/cekorder/:id', orderController.findOrderbyId) // works
+router.post('/order/addorder', orderController.insertOrder) // works
 router.delete('/order/delete', orderController.deleteOrder)
 
 

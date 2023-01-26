@@ -26,6 +26,7 @@ class ItemController {
     async insertItem (req, res, next) {
         try {
             const createItem = await Item.create({
+                id_user: req.body.id_user,
                 code_item: req.body.code_item,
                 nama_item: req.body.nama_item,
                 harga: req.body.harga,
@@ -40,7 +41,7 @@ class ItemController {
     async findItembyId (req, res, next) {
         try{
                 const id = req.body.id_item
-                const findItem = await User.findByPk(id)
+                const findItem = await Item.findOne(id)
             return new Response(res, 200, findItem)
         } 
         catch(error) {

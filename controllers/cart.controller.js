@@ -12,7 +12,7 @@ class CartController {
     async getCart(req, res, next) {
         try{
                 const dataCart = await Cart.findAll({
-                attributes: ['id_cart', 'id_user', 'id_item', 'total_item', 'total_harga']
+                attributes: ['id_cart', 'id_user', 'id_item', 'status_cart', 'total_item', 'total_harga']
         })
         return new Response(res,200,dataCart)
         }
@@ -26,6 +26,7 @@ class CartController {
             const createCart = await Cart.create({
                 id_user: req.body.id_user,
                 id_item: req.body.id_item,
+                status_cart: req.body.status_cart,
                 total_item: req.body.total_item,
                 total_harga: req.body.total_harga
             })
@@ -38,7 +39,7 @@ class CartController {
     async findCartbyId (req, res, next) {
         try{
             const id = req.params.id_cart
-            const findCart = await User.findByPk(id)
+            const findCart = await Cart.findOne(id)
             return new Response(res,200, findCart)
             }
             catch(error){

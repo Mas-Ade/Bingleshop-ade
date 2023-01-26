@@ -15,7 +15,6 @@ module.exports = {
         references : {
           model: "tb_carts",
           key: "id_cart",
-          as: "id_cart"
         }
       },
       id_user: {
@@ -24,7 +23,6 @@ module.exports = {
         references : {
           model: "tm_users",
           key: "id_user",
-          as: "id_user"
         }
       },
       code_payment: {

@@ -12,13 +12,42 @@ const StatusOrder = require('./tb_status_orders')
 const sequelize = require('./sequelize')
 
 
+User.belongsTo(Item,{
+  foreignKey: 'id_user',
+})
+
 Item.hasMany(User,{
   foreignKey: 'id_user',
 })
 
-User.belongsTo(Item,{
-    foreignKey: 'id_user',
-})
+
+// StatusOrder.hasMany(User,{
+//   foreignKey: 'id_user'
+// })
+
+// Order.hasMany(User,{
+//   foreignKey: 'id_user'
+// })
+
+// Cart.hasMany(User,{
+//   foreignKey: 'id_user'
+// })
+
+// Item.belongsTo(Cart,{
+//     foreignKey: 'id_item',
+// })
+
+// Cart.hasOne(Item,{
+//   foreignKey: 'id_item'
+// })
+
+// Cart.belongsTo(Order,{
+//     foreignKey: 'id_cart',
+// })
+
+// Order.belongsTo(StatusOrder,{
+//     foreignKey: 'id_order',
+// })
 
  // export module user,product dan sequelize
 module.exports = {

@@ -4,9 +4,6 @@ const ErrorResponse = require("../helpers/error.helper")
 const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
 const { StatusOrder } = require('../database/models')
-const { registerSchema } = require('../validations/schema/register.schema')
-const { validate } = require("../middlewares/validation")
-const bcrypt = require ('bcrypt')
 
 
 class StatusOrderController {
@@ -15,47 +12,41 @@ class StatusOrderController {
         try{
         const dataStatus = await StatusOrder.findAll({
             attributes: ['id_status_order', 'id_order', 'id_user', 'payment_status', 'delivery_date','received_Date'],
-            
         })
             return new Response(res,200,dataStatus)
         }catch(error) {
-            next(error)
+            next()
         }
     }
     
-    
-    async insertStatusOrder (req, res) {
+    async insertStatusOrder (req, res, next) {
         try {
-            const createItem = await StatusOrder.create({
+            const createStatus = await StatusOrder.create({
                 id_order: req.body.id_order,
                 id_user: req.body.id_user,
-                payment_status: req.body.payment_status,
-                delivery_date: req.body.stock,
-                receive_date: req.body.stock,
+                payment_status: req.body.payment_status
             })
+            return new Response(res,200,createStatus)
         } catch(error) {
         next(error)
         }
     }
 
-        findItembyId (req, res) {
+        findStatusOrderbyId (req, res, next) {
+            try{
 
-            const id = req.params.id_item
-            createUser = User.findByPk(id)
-            .then((result) => {
-                res.status(200).json({
-                    
-                    data: result
-                })
-            }).catch((error) => {
-                res.status(500).json({
-                    message: error.message
+            const id = req.params.id_status_order
 
-                })
-            })
+            findStatus = StatusOrder.findOne(id)
+            return new Response (res ,200, findStatus)
+            
+        } catch(error){
+            next(error)
+        }
+            
         } 
 
-    deleteItem(res,req) {
+    deleteStatusOrder(res,req, next) {
 
         const id = User.req.body
         deleteUserbyId = User.destroy({where: {id_user: 6}}).then((result) => {

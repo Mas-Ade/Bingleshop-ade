@@ -12,8 +12,8 @@ class OrderController {
     async getOrder(req, res, next) {
         try{
         const dataItem = await Order.findAll({
-            attributes: ['id_order', 'id_cart', 'id_user', 'code_payment'],
-            include: ['tm_users','id_cart']
+            attributes: ['id_order', 'id_cart','id_user', 'code_payment'],
+            
         })
         return new Response(res,200,dataItem)
         }
@@ -22,7 +22,7 @@ class OrderController {
         }}
     
 // method untuk create data order
-    async insertOrder (req, res) {
+    async insertOrder (req, res, next) {
         try {
             const createOrder = await Order.create({
                 id_cart: req.body.id_cart,
@@ -37,13 +37,13 @@ class OrderController {
     }
 
 // method untuk create data order
-    async findOrderbyId (req, res,next ) {
+    async findOrderbyId (req, res, next) {
         try{
-            const id = req.params.id_order
-            createOrder = User.findByPk(id)
-        return new Response (res,200, createOrder)
-        } 
-        catch{
+            const id = req.body.id_order
+            const findItem = await Order.findOne(id)
+        return new Response(res, 200, findItem)
+    } 
+        catch(error) {
             next(error)
         } 
         }
@@ -58,8 +58,6 @@ class OrderController {
         catch(error){
             next(error)
         }
-
-        
     }
     }
 

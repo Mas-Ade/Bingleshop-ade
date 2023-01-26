@@ -15,10 +15,6 @@ Tm_users.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    noreg_user: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     password: {
       type: DataTypes.STRING,
       allowNull: false
@@ -29,10 +25,6 @@ Tm_users.init(
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    no_telp: {
-      type: DataTypes.INTEGER,
       allowNull: false
     },
   },

@@ -14,10 +14,6 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false
         },
-        noreg_user: {
-          type: Sequelize.STRING,
-          allowNull: false
-        },
         password: {
           type: Sequelize.STRING,
           allowNull: false
@@ -28,10 +24,6 @@ module.exports = {
         },
         address: {
           type: Sequelize.STRING,
-          allowNull: false
-        },
-        no_telp: {
-          type: Sequelize.INTEGER,
           allowNull: false
         },
 

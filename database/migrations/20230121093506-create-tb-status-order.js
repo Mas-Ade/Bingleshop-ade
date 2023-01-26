@@ -16,7 +16,7 @@ module.exports = {
         references : {
           model: "tb_orders",
           key: "id_order",
-          as: "id_order"
+
         }
       },
       id_user: {
@@ -25,7 +25,6 @@ module.exports = {
         references : {
           model: "tm_users",
           key: "id_user",
-          as: "id_user"
         }
       },
       payment_status: {

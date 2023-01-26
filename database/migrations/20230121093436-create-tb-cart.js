@@ -23,8 +23,11 @@ module.exports = {
         references : {
           model: "tb_items",
           key: "id_item",
-          as: "id_item"
         }
+      },
+      status_cart: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       total_item: {
         type: Sequelize.INTEGER,

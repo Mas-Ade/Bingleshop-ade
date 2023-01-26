@@ -15,7 +15,6 @@ module.exports = {
         references : {
           model: "tm_users",
           key: "id_user",
-          as: "id_user"
         }
       },
       code_item: {

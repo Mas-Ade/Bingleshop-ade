@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require('./sequelize')
 
-class tb_orders extends Model {
+class tb_status_order extends Model {
 }
 
-tb_orders.init(
+tb_status_order.init(
   {
     id_status_order: {
       allowNull: false,
@@ -18,7 +18,6 @@ tb_orders.init(
       references : {
         model: "tb_orders",
         key: "id_order",
-        as: "id_order"
       }
     },
     id_user: {
@@ -27,7 +26,7 @@ tb_orders.init(
       references : {
         model: "tm_users",
         key: "id_user",
-        as: "id_user"
+        
       }
     },
     payment_status: {
@@ -55,4 +54,4 @@ tb_orders.init(
   },
 )
 
-module.exports = tb_orders
+module.exports = tb_status_order
