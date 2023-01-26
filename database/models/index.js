@@ -11,6 +11,17 @@ const StatusOrder = require('./tb_status_orders')
 // import sequilize module
 const sequelize = require('./sequelize')
 
+StatusOrder.hasMan(User,{
+  foreignKey: 'id_user'
+})
+
+Order.hasMan(User,{
+  foreignKey: 'id_user'
+})
+
+Cart.hasMany(user,{
+  foreignKey: 'id_user'
+})
 
 User.belongsTo(Item,{
   foreignKey: 'id_user',
@@ -48,6 +59,18 @@ Item.hasMany(User,{
 // Order.belongsTo(StatusOrder,{
 //     foreignKey: 'id_order',
 // })
+
+Item.belongsTo(Cart,{
+    foreignKey: 'id_item',
+})
+
+Cart.belongsTo(Order,{
+    foreignKey: 'id_cart',
+})
+
+Order.belongsTo(StatusOrder,{
+    foreignKey: 'id_order',
+})
 
  // export module user,product dan sequelize
 module.exports = {
