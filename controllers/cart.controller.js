@@ -3,7 +3,7 @@ const ErrorResponse = require("../helpers/error.helper")
 // import Response OK  API
 const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
-const { Cart } = require('../database/models')
+const { Cart, User, Item } = require('../database/models')
 
 // Class Cart
 class CartController {
@@ -12,7 +12,8 @@ class CartController {
     async getCart(req, res, next) {
         try{
                 const dataCart = await Cart.findAll({
-                attributes: ['id_cart', 'id_user', 'id_item', 'status_cart', 'total_item', 'total_harga']
+                attributes: ['id_cart', 'id_user', 'id_item', 'status_cart', 'total_item', 'total_harga'],
+                include: [User,Item]
         })
         return new Response(res,200,dataCart)
         }
@@ -35,6 +36,7 @@ class CartController {
         catch(error) {
         next(error)
         }}
+        
 // method untuk akses lihat data cart by Id
     async findCartbyId (req, res, next) {
         try{

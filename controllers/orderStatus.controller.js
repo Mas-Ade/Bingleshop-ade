@@ -3,7 +3,7 @@ const ErrorResponse = require("../helpers/error.helper")
 // import Response OK  API
 const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js modely
-const { StatusOrder } = require('../database/models')
+const { StatusOrder, Order, User } = require('../database/models')
 
 
 class StatusOrderController {
@@ -12,6 +12,7 @@ class StatusOrderController {
         try{
         const dataStatus = await StatusOrder.findAll({
             attributes: ['id_status_order', 'id_order', 'id_user', 'payment_status', 'delivery_date','received_Date'],
+            include:[User,Order]
         })
             return new Response(res,200,dataStatus)
         }catch(error) {
