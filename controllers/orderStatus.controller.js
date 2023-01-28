@@ -10,13 +10,20 @@ class StatusOrderController {
     // SEND GET REQUEST to see data table in tm_user
     async getStatusOrder(req, res,next) {
         try{
-        const dataStatus = await StatusOrder.findAll({
-            attributes: ['id_status_order', 'id_order', 'id_user', 'payment_status', 'delivery_date','received_Date'],
-            include:[User,Order]
-        })
-            return new Response(res,200,dataStatus)
-        }catch(error) {
-            next()
+        const Status = await StatusOrder.findAll({
+            attributes: ['id_status_order', 'id_order', 'id_user', 'payment_status','delivery_date','received_date'],  
+            include: [{model: Order, attributes:[
+                'id_users',
+                'id_order' 
+            ]}
+        ]
+        
+        }
+        )
+            return new Response(res,200,Status)
+        } catch(Error) {
+            console.log('ini error 1')
+            next(Error)
         }
     }
     

@@ -43,62 +43,26 @@ Order.hasOne(Item,{
 
 // work cart to order
 Order.hasOne(Cart,{
+  foreignKey: 'id_cart'
+})
+
+// works user to status order
+User.hasMany(StatusOrder,{
   foreignKey: 'id_user'
 })
 
-StatusOrder.belongsTo(Order,{
+// works status order to user
+StatusOrder.belongsTo(User,{
+  foreignKey: 'id_user'
+})
+
+StatusOrder.hasOne(Order,{
   foreignKey: 'id_order'
 })
 
-User.hasOne(StatusOrder,{
-  foreignKey: 'id_user'
-})
 
 
 
-
-
-
-
-// StatusOrder.hasMany(User,{
-//   foreignKey: 'id_user'
-// })
-
-// Order.hasMany(User,{
-//   foreignKey: 'id_user'
-// })
-
-// Cart.hasMany(User,{
-//   foreignKey: 'id_user'
-// })
-
-// Item.belongsTo(Cart,{
-//     foreignKey: 'id_item',
-// })
-
-// Cart.hasOne(Item,{
-//   foreignKey: 'id_item'
-// })
-
-// Cart.belongsTo(Order,{
-//     foreignKey: 'id_cart',
-// })
-
-// Order.belongsTo(StatusOrder,{
-//     foreignKey: 'id_order',
-// })
-
-Item.belongsTo(Cart,{
-    foreignKey: 'id_item',
-})
-
-Cart.belongsTo(Order,{
-    foreignKey: 'id_cart',
-})
-
-Order.belongsTo(StatusOrder,{
-    foreignKey: 'id_order',
-})
 
  // export module user,product dan sequelize
 module.exports = {

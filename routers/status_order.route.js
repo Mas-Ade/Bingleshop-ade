@@ -13,5 +13,4 @@ router.get('/status/cekstatus/:id', statusOrderController.findStatusOrderbyId)
 router.post('/status/addstatusorder', statusOrderController.insertStatusOrder)
 router.delete('/status/delete', statusOrderController.deleteStatusOrder)
 
-
 module.exports = router

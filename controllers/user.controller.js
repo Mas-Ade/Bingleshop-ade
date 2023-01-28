@@ -6,11 +6,9 @@ const Response = require("../helpers/response.helper")
 // import Product class dari model dari index.js model
 const { User } = require('../database/models')
 const { joi } = require('joi')
+const { StatusOrder } = require('../database/models')
 
-// const { StatusOrder } = require('../database/models')
-// const { registerSchema } = require('../validations/schema/register.schema')
-// const { validate } = require("../middlewares/validation")
-// const bcrypt = require ('bcrypt')
+const bcrypt = require ('bcrypt')
 
 // Class User
 class UserController {
@@ -26,7 +24,26 @@ class UserController {
         catch(error){
         next(error)
         }}
- 
+
+        
+ // method untuk registrasi data user with validasi 
+ async registerUser (req, res, next) {
+        
+    try{
+        const {nama_user, email, password} = req.body
+        
+        const createUser = await User.create({
+            nama_user: nama_user,
+            email: email,
+            password: password})
+
+    return new Response (res, 200, createUser)
+    }   
+    catch(error) {
+        next(error)
+        }}
+
+
 // method untuk registrasi data user 
     async insertUser (req, res, next) {
         

@@ -40,7 +40,6 @@ module.exports = {
         allowNull: true
       },
 
-
        //Default API
        created_at: {
         type: Sequelize.DATE,

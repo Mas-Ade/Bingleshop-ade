@@ -24,8 +24,7 @@ app.use('/v1', StatusOrder)
 // function catch error/ next
 app.use((err, req, res, next) => {
     console.log(err)
-
-    const status = err.status || 500 
+    const status = err.status || 500 || 404 || 400
     const error = err.error || err.message || "internal server error"
 
     return res.status(err.status).json({
@@ -37,11 +36,3 @@ app.use((err, req, res, next) => {
 
 
 module.exports = app
-
-// MVC: model - view - controller
-// SELECT * FROM "items" WHERE item_id = 1
-// SELECT * FROM "items" WHERE item_id = 1 AND item_status = 'active'
-
-// MCR: model - controller - router
-
-// model/repository - controller - service - router
