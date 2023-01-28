@@ -27,10 +27,10 @@ app.use((err, req, res, next) => {
     const status = err.status || 500 || 404 || 400
     const error = err.error || err.message || "internal server error"
 
-    return res.status(err.status).json({
-        status: status,
+    return res.status(status).json({
+        status: false,
         data: {},
-        error: err
+        error: error
     })
 })
 

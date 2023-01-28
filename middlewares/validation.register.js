@@ -6,7 +6,6 @@ try{
     await schema.validateAsync(req.body)
 }
 catch (error){
-    console.log('error 2')
 
     const messages = []
 

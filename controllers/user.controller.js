@@ -37,7 +37,7 @@ class UserController {
             email: email,
             password: password})
 
-    return new Response (res, 200, createUser)
+        return new Response (res, 200, createUser)
     }   
     catch(error) {
         next(error)
@@ -45,9 +45,9 @@ class UserController {
 
 
 // method untuk registrasi data user 
-    async insertUser (req, res, next) {
+async insertUser (req, res, next) {
         
-        try{
+    try{
             
             const createUser = await User.create({
             nama_user: req.body.nama_user,
@@ -57,24 +57,24 @@ class UserController {
             })
         return new Response(res, 200, createUser)
         }   
-        catch(error) {
+    catch(error) {
             console.log(error)
             // next(error)
             }}
 
 // method untuk cek data user by id_user
-        async findUserbyId (req, res, next) {
+async findUserbyId (req, res, next) {
         try {
             const id = req.body.id_user
             const findUser = await User.findOne(id)
-        return new Response(res,200,findUser)
-        }   
+            return new Response(res,200,findUser)
+            }   
         catch(error){
             next(error)
         }} 
 
 // method untuk delete data user
-    async deleteUser(res,req, next) {
+async deleteUser(res,req, next) {
         try {
             const id = User.req.body
             const deleteUserbyId = await User.destroy({where: {id_user: 6}})
