@@ -1,14 +1,11 @@
-// import Response Error API
-const ErrorResponse = require("../helpers/error.helper")
 // import Response OK  API
 const Response = require("../helpers/response.helper")
-
 // import Product class dari model dari index.js model
 const { User } = require('../database/models')
-const { joi } = require('joi')
-const { StatusOrder } = require('../database/models')
-
 const bcrypt = require ('bcrypt')
+const { validate } = require ('../middlewares/validation.register')
+const {registerSchema} = require ('../validations/schemas/register.schema')
+const ErrorResponse = require("../helpers/error.helper")
 
 // Class User
 class UserController {
@@ -24,43 +21,46 @@ class UserController {
         catch(error){
         next(error)
         }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
         
- // method untuk registrasi data user with validasi 
- async registerUser (req, res, next) {
+ // method untuk registrasi data user with validasi (works)
+async registerUser (req, res, next) {
         
     try{
-        const {nama_user, email, password} = req.body
+        const {nama_user, email, password, address} = req.body
+
+        await validate(registerSchema, req.body)
         
-        const createUser = await User.create({
+        const cekuser = await User.findOne({
+            where: {
+                email 
+            },
+            // attribute adalah key untuk query data yang dicari ( select user by 'id_user' )
+            attribute: ['id_user']  
+        })
+
+        if(cekuser){
+            throw new ErrorResponse (400, 'email sudah terdaftar') 
+        }
+
+        const hashPassword = await bcrypt.hash(password, 8)
+
+        if(!cekuser){
+        const Register = await User.create({
             nama_user: nama_user,
             email: email,
-            password: password})
-
-        return new Response (res, 200, createUser)
+            password: hashPassword,
+            address: address
+            })
+        return new Response (res, 200, Register)
+    }
     }   
+
     catch(error) {
         next(error)
         }}
-
-
-// method untuk registrasi data user 
-async insertUser (req, res, next) {
-        
-    try{
-            
-            const createUser = await User.create({
-            nama_user: req.body.nama_user,
-            email: req.body.email,
-            password: req.body.password,
-            address: req.body.address,
-            })
-        return new Response(res, 200, createUser)
-        }   
-    catch(error) {
-            console.log(error)
-            // next(error)
-            }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
 // method untuk cek data user by id_user
 async findUserbyId (req, res, next) {
@@ -72,6 +72,7 @@ async findUserbyId (req, res, next) {
         catch(error){
             next(error)
         }} 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
 // method untuk delete data user
 async deleteUser(res,req, next) {
@@ -83,7 +84,8 @@ async deleteUser(res,req, next) {
         catch(error){
             next(error)
         }}
-        
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
+
 }
 
 module.exports = {

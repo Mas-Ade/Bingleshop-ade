@@ -4,8 +4,10 @@ const Joi = require('joi')
     const registerSchema = Joi.object({
         nama_user: Joi.string().min(5).required(),
         email: Joi.string().required(),
-        passwrod: Joi.string().required(),   
-    }).required()
+        password: Joi.string().required(),
+        address: Joi.string().required(),  
+
+    })
    
 module.exports = { registerSchema }
 

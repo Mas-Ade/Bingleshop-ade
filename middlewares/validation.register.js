@@ -1,9 +1,9 @@
 const ErrorResponse = require("../helpers/error.helper");
 
 // membuat method dengan props schema
-const validate = (schema) => async (req, res, next) => {
+const validate = async (schema, bodies ) => {
 try{
-    await schema.validateAsync(req.body)
+    await schema.validateAsync(bodies)
 }
 catch (error){
 
@@ -16,7 +16,7 @@ catch (error){
         })
     })
 
-    next(new ErrorResponse(400, messages))
+    throw new ErrorResponse(400, messages)
     
 }
 }

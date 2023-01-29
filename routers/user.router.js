@@ -13,8 +13,7 @@ const userController = new UserController()
 // route untuk end point user
 router.get('/user/datauser',  userController.getUser) // works
 router.get('/user/cekuser/:id', userController.findUserbyId) // works
-router.post('/user/registrasi',  userController.insertUser) // works
-router.post('/user/validasiregis', validate(registerSchema),  userController.registerUser) // works
+router.post('/user/validasiregis', userController.registerUser) // works
 router.delete('/user/delete', userController.deleteUser)
 
 module.exports = router

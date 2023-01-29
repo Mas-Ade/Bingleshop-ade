@@ -24,6 +24,9 @@ class CartController {
 // method untuk menambah data cart
     async insertCart (req, res, next) {
         try {
+
+            const {nama_item, total_item , total_harga} = req.body
+
             const createCart = await Cart.create({
                 id_user: req.body.id_user,
                 id_item: req.body.id_item,
