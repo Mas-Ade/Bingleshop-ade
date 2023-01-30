@@ -11,7 +11,6 @@ const cartController = new CartController()
 router.get('/cart/datacart', cartController.getCart) //works
 router.get('/cart/cekcart/:id', cartController.findCartbyId) //works
 router.post('/cart/addcart', cartController.insertCart) //works
-router.delete('/cart/delete', cartController.deleteCart)
 
 
 module.exports = router

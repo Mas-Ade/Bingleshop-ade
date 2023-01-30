@@ -11,6 +11,7 @@ const statusOrderController = new StatusOrderController()
 router.get('/status/datastatus', statusOrderController.getStatusOrder)
 router.get('/status/cekstatus/:id', statusOrderController.findStatusOrderbyId)
 router.post('/status/addstatusorder', statusOrderController.insertStatusOrder)
+router.patch('/status/update', statusOrderController.updateOrder)
 router.delete('/status/delete', statusOrderController.deleteStatusOrder)
 
 module.exports = router

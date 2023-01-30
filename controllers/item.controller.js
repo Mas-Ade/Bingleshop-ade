@@ -14,13 +14,13 @@ class ItemController {
         try{
             const dataItem = await Item.findAll({
             attributes: ['id_item', 'id_user', 'code_item', 'nama_item', 'harga','stock'],
-            include: User // table databse yang terlelasi
         })
         return new Response(res,200,dataItem)
         }
         catch(error){
         next(error)
         }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
         
 // method untuk akses Insert data item(admin)/ buat pesanan(user)
     async insertItem (req, res, next) {
@@ -36,17 +36,23 @@ class ItemController {
         } catch(error) {
         next(error)
         }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
 // method untuk akses data item by Id
     async findItembyId (req, res, next) {
         try{
-                const id = req.body.id_item
-                const findItem = await Item.findOne(id)
+                const id = req.params.id
+                const findItem = await Item.findOne({where:{id_item: id},
+                include: {model: User,
+                attributes: [
+                    'nama_user'
+                ]}})
             return new Response(res, 200, findItem)
         } 
         catch(error) {
-            next(error)
+        next(error)
         }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
 // method untuk delete data item by Id        
     async deleteItem(res, req, next) {
@@ -58,7 +64,7 @@ class ItemController {
     catch(error){
         next(error)
     }}
-
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
     }
 

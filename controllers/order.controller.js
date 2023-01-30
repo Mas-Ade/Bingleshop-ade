@@ -21,6 +21,7 @@ class OrderController {
         catch(error){
             next(error)
         }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
     
 // method untuk create data order
     async insertOrder (req, res, next) {
@@ -36,19 +37,26 @@ class OrderController {
             next(error)
         }
     }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
-// method untuk create data order
+// method untuk cek data order by id
     async findOrderbyId (req, res, next) {
         try{
-            const id = req.body.id_order
-            const findItem = await Order.findOne(id)
+            const id = req.params.id
+            const findItem = await Order.findOne({where:{id_order: id},
+                include: {model: User,
+                attributes: [
+                    'nama_user'
+                ]}})
         return new Response(res, 200, findItem)
     } 
         catch(error) {
             next(error)
         } 
         }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
+//  method untuk delet order
     async deleteOrder(res,req, next) {
         try{
 
@@ -61,6 +69,7 @@ class OrderController {
         }
     }
     }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
 
 module.exports = {
