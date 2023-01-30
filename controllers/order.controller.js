@@ -12,7 +12,7 @@ class OrderController {
     async getOrder(req, res, next) {
         try{
         const dataItem = await Order.findAll({
-            attributes: ['id_order', 'id_cart','id_user', 'code_payment'],
+            attributes: ['id_order', 'id_cart','id_user', 'code_payment','order_status'],
             include: [Item,User,Cart]
             
         })
@@ -30,6 +30,7 @@ class OrderController {
                 id_cart: req.body.id_cart,
                 id_user: req.body.id_user,
                 code_payment: req.body.code_payment,
+                status_order: req.body.status_order,
             })
         return new Response(res, 200, createOrder )
         } 

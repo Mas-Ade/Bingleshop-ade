@@ -3,6 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tb_carts', {
+
       id_cart: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -29,7 +30,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      total_item: {
+      qty_item: {
         type: Sequelize.INTEGER,
         allowNull: true
       },

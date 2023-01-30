@@ -3,6 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('tb_orders', {
+
       id_order: {
         allowNull: false,
         autoIncrement: true,
@@ -26,6 +27,10 @@ module.exports = {
         }
       },
       code_payment: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      order_status: {
         type: Sequelize.STRING,
         allowNull: true
       },

@@ -26,6 +26,10 @@ tb_orders.init(
       type: DataTypes.STRING,
       allowNull: true
     },
+    order_status: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
   },
   {
     sequelize: sequelize,

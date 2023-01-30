@@ -12,7 +12,7 @@ class CartController {
     async getCart(req, res, next) {
         try{
                 const dataCart = await Cart.findAll({
-                attributes: ['id_cart', 'id_user', 'id_item', 'status_cart', 'total_item', 'total_harga'],
+                attributes: ['id_cart', 'id_user', 'id_item', 'status_cart', 'qty_item', 'total_harga'],
                 include: {model: Item,
                 attributes:[
                     'id_item',
@@ -30,13 +30,11 @@ class CartController {
     async insertCart (req, res, next) {
         try {
 
-            const {nama_item, total_item , total_harga} = req.body
-
             const createCart = await Cart.create({
                 id_user: req.body.id_user,
                 id_item: req.body.id_item,
                 status_cart: req.body.status_cart,
-                total_item: req.body.total_item,
+                qty_item: req.body.qty_item,
                 total_harga: req.body.total_harga
             })
         return new Response(res,200, createCart)

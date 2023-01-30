@@ -29,7 +29,7 @@ Tb_carts.init(
         type: DataTypes.STRING,
         allowNull: true
       },
-      total_item: {
+      qty_item: {
         type: DataTypes.INTEGER,
         allowNull: true
       },

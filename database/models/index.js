@@ -6,8 +6,7 @@ const Item = require('./tb_items')
 const Cart = require('./tb_carts')
 // import class Tb_order
 const Order = require('./tb_orders')
-// import class Tb_status_order
-const StatusOrder = require('./tb_status_orders')
+
 // import sequilize module
 const sequelize = require('./sequelize')
 
@@ -46,19 +45,19 @@ Order.hasOne(Cart,{
   foreignKey: 'id_cart'
 })
 
-// works user to status order
-User.hasMany(StatusOrder,{
-  foreignKey: 'id_user'
-})
+// // works user to status order
+// User.hasMany(StatusOrder,{
+//   foreignKey: 'id_user'
+// })
 
-// works status order to user
-StatusOrder.belongsTo(User,{
-  foreignKey: 'id_user'
-})
+// // works status order to user
+// StatusOrder.belongsTo(User,{
+//   foreignKey: 'id_user'
+// })
 
-StatusOrder.hasOne(Order,{
-  foreignKey: 'id_order'
-})
+// StatusOrder.hasOne(Order,{
+//   foreignKey: 'id_order'
+// })
 
 
 
@@ -70,6 +69,5 @@ module.exports = {
   Item,
   Cart,
   Order,
-  StatusOrder,
   sequelize
 }
