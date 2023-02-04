@@ -58,7 +58,8 @@ async registerUser (req, res, next) {
 // method untuk cek data user by id_user
 async loginUser (req, res, next) {
         try {
-            const {id,email} = req.body
+            
+            const {email , password} = req.body
             const checkUser = await User.findOne({
                 where: {
                     email 
@@ -72,27 +73,48 @@ async loginUser (req, res, next) {
                 message: `Email ${email} tidak terdaftar !!`
             })
             }
+
+            const checkPassword = await bcrypt.compare( password , checkUser.password )
             
             if(checkUser){
-            const checkPassword = bcrypt.compareSync( req.body.password , User.password )
-            res.send( { 
-                data: checkPassword , 
-                dataEmail : checkUser
-        })
 
-            // if(checkPassword){
-            //     console.log(checkPassword)
-            //     // res.send({
-            //     //     message: "berhasil Login"
-            //     // })
-            // }
-            // if(!checkPassword){
-            //     console.log(checkPassword)
-            //     res.send({
-            //         message: "Password tidak sesuai"
-            //     })
-            // }
-        }}
+            if(!checkPassword){
+                res.send({
+                    message: 'password tidak sesuai'
+                })
+            }
+
+            if(checkPassword){
+                const showItem = await Item.findAll({
+                    attributes: ['nama_item', 'harga','stock'],
+                })
+
+            console.log('data Item : ', showItem)
+            const message = " Selamat datang di bingleShop beta "
+            return new Response (res, 200, showItem , message )
+            }
+            
+            
+            // console.log("data user : " , checkUser)
+            // console.log("data password : ", checkPassword)
+
+        //     if(!checkPassword){
+        //         res.send({
+        //             message: "Password tidak sesuai"
+        //         })
+        //     }
+
+        //     if(checkPassword){
+        //         const showItem = Item.findOne({
+        //             where: checkUser.id_user 
+        //         })
+        //     console.log(showItem)
+        //     // const message = " Selamat datang di bingleShop beta "
+        //     // return new Response (res, 200, showItem , message )
+                
+        // }
+    }
+    }
         catch(error){
             next(error)
         }} 
@@ -134,6 +156,14 @@ async createCart (req, res, next) {
                 qty_item: qty_item,
                 total_harga : (CheckItem.harga * qty_item)
                 })
+
+            if(saveCart){
+                const updateQtyItem = await Item.update ({qty_item: (CheckItem.qty_item - qty_item)}, {
+                        where: {
+                            id_cart: id_cart
+                        }
+                    })
+                }
                 const message = "Cart berhasil disimpan !"
                 return new Response (res, 200, saveCart , message )
                 
