@@ -9,6 +9,7 @@ const userRouter = require('./routers/user.router')
 const itemRouter = require('./routers/items.router')
 const cartRouter = require('./routers/cart.route')
 const orderRouter = require('./routers/orders.router')
+const bingleShop = require('./routers/bingleShop.router')
 
 // Middleware: request -> middleware -> controller/handler
 app.use(express.json()) // contoh fungsi express.json()
@@ -18,6 +19,7 @@ app.use('/v1', userRouter)
 app.use('/v1', itemRouter)
 app.use('/v1', cartRouter)
 app.use('/v1', orderRouter)
+app.use('/v1', bingleShop)
 
 
 // function catch error/ next

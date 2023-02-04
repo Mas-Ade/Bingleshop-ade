@@ -74,6 +74,20 @@ async findUserbyId (req, res, next) {
         }} 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
+// method untuk cek data user by id_user
+async findUserbyId1 (req, res, next) {
+        try {
+            const id = req.params.id_user
+            const findUser = await User.findAll({attribute: [['id_user',id],['nama_user','admin 2']]})
+            return new Response(res,200,findUser).then(()=> {
+                res.send('Berikut adalah data anda')
+            })
+            }   
+        catch(error){
+            next(error)
+        }} 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
+
 // method untuk delete data user
 async deleteUser(res,req, next) {
         try {
@@ -86,6 +100,22 @@ async deleteUser(res,req, next) {
         }}
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
+//method update user (works)
+async updateUser (req, res, next) {
+    try {
+        const nama = req.body.nama_user
+        const id = req.body.id_user
+        const updateNama = await User.update({nama_user: nama}, {
+            where: {
+                id_user: id
+            }
+        })
+        return new Response(res,200,updateNama)
+        }   
+    catch(error){
+        next(error)
+    }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 }
 
 module.exports = {

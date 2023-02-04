@@ -50,7 +50,7 @@ class OrderController {
                     'nama_user'
                 ]}})
         return new Response(res, 200, findItem)
-    } 
+            } 
         catch(error) {
             next(error)
         } 
@@ -69,8 +69,57 @@ class OrderController {
             next(error)
         }
     }
-    }
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
+
+// method untuk create data order
+async createOrder (req, res, next) {
+    try {
+
+    const idCart = req.body.id_cart
+    const isExistCart = await Cart.findOne({attributes:['id_cart','qty_item'],
+where:{
+    id_cart: idCart }
+})
+
+const idItem = req.body.id_item
+    const isExistItem = await Cart.findOne({attributes:['id_item','qty_item'],
+where:{
+    id_cart: idCart }
+})
+
+    const updateQty = await Item.update({qty_item: nama}, {
+    where: {
+        id_user: id
+    }
+})
+
+    const createOrder = await Order.create({
+        id_cart: req.body.id_cart,
+        id_user: req.body.id_user,
+        code_payment: req.body.code_payment,
+        status_order: req.body.status_order,
+    })
+
+    if(!isExist) {
+        res.send(JSON.stringify("data user tidak ada"))
+    }
+    if(isExist){
+        createOrder()
+        return new Response(res, 200, createOrder )
+    }else{
+        if(createOrder){
+
+        }
+    }
+    } 
+    catch(error) {
+        next(error)
+    }
+}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
+
+}
+
 
 
 module.exports = {
