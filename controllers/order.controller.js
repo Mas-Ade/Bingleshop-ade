@@ -13,7 +13,7 @@ class OrderController {
         try{
         const dataItem = await Order.findAll({
             attributes: ['id_order', 'id_cart','id_user', 'code_payment','order_status'],
-            include: [Item,User,Cart]
+            // include: [Item,User,Cart]
             
         })
         return new Response(res,200,dataItem)

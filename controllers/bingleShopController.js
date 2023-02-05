@@ -63,9 +63,7 @@ async loginUser (req, res, next) {
             const checkUser = await User.findOne({
                 where: {
                     email 
-                }
-                // // attribute adalah key untuk query data yang dicari ( select user by 'id_user' )
-                // attribute: ['id_user']  
+                } 
             })
 
             if(!checkUser){
@@ -94,25 +92,6 @@ async loginUser (req, res, next) {
             return new Response (res, 200, showItem , message )
             }
             
-            
-            // console.log("data user : " , checkUser)
-            // console.log("data password : ", checkPassword)
-
-        //     if(!checkPassword){
-        //         res.send({
-        //             message: "Password tidak sesuai"
-        //         })
-        //     }
-
-        //     if(checkPassword){
-        //         const showItem = Item.findOne({
-        //             where: checkUser.id_user 
-        //         })
-        //     console.log(showItem)
-        //     // const message = " Selamat datang di bingleShop beta "
-        //     // return new Response (res, 200, showItem , message )
-                
-        // }
     }
     }
         catch(error){
@@ -244,6 +223,92 @@ async createOrder (req, res, next) {
     }
         
     }
+    catch(error){
+        next(error)
+    }} 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
+
+async updateStatusOrder (req, res, next) {
+    try {
+        
+        const {id_order , id_cart ,  email ,  code_payment } = req.body
+        const checkOrder = await Order.findOne({
+            where: {
+                id_order 
+            } 
+        })
+
+        if(!checkOrder){
+            res.send({
+            message: `Orderan tidak tersedia !!`
+        })
+        }
+
+        if(checkOrder) {
+        const checkCart = await Cart.findOne({
+            where: {
+                id_cart 
+            } 
+        })
+
+        if(!checkCart){
+            res.send({
+            message: `Cart tidak tersedia !!`
+        })
+        }
+        
+        if(checkCart){
+        const Userss = checkCart.email
+         const checkUser = await User.findOne({
+            where: {
+                email
+            }
+        })
+
+        if(!checkUser){
+            res.send({
+            message: `email ${email} tidak sesuai `
+        })
+        }
+
+        if(checkUser){
+        const Itemss = checkCart.id_item
+        const checkItem = await Item.findOne({
+            where: {
+                id_item : checkCart.id_item
+            }
+        })
+        
+
+        if(checkItem){
+        
+        const updateStatusCart = await Order.update ({
+            
+            code_payment: code_payment,
+            order_status: "dibayar"
+            
+            }, {
+                where: {
+                    id_order: id_order
+                }
+            })
+        }
+
+        const message = "Order berhasil diupdate pesanan sudah dibayar !!"
+        res.send({
+            message: message,
+            data: {
+                id_cart : checkOrder.id_cart,
+                email : checkUser.email, 
+                item :  checkItem.nama_item
+            }
+        })
+
+
+        }
+        }    
+}
+}
     catch(error){
         next(error)
     }} 

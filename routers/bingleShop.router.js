@@ -17,4 +17,6 @@ router.post('/cart', bingleShopController.createCart) // works
 
 router.post('/order', bingleShopController.createOrder) // works
 
+router.post('/updateorder', bingleShopController.updateStatusOrder) // works
+
 module.exports = router
