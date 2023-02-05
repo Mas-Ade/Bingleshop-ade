@@ -55,7 +55,7 @@ async registerUser (req, res, next) {
         }}
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
-// method untuk Login
+// method untuk Login (works)
 async loginUser (req, res, next) {
         try {
             
@@ -99,10 +99,10 @@ async loginUser (req, res, next) {
         }} 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
-// method untuk buat pesanan ( qty belum berkurang otomatis)
+// method untuk buat pesanan ( works )
 async createCart (req, res, next) {
     try {
-        const {id,email,nama_item, qty_item } = req.body
+        const { email,nama_item, qty_item } = req.body
         const checkUser = await User.findOne({
             where: {
                 email 
