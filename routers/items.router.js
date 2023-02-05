@@ -11,6 +11,7 @@ const itemController = new ItemController()
 router.get('/item/dataitem', itemController.getItem) // works
 router.get('/item/cekitem/:id', itemController.findItembyId) // works
 router.post('/item/additem', itemController.insertItem) // works
+router.put('/item/addstock', itemController.updateStockItem)
 router.delete('/item/delete', itemController.deleteItem)
 
 module.exports = router

@@ -32,7 +32,8 @@ class ItemController {
                 harga: req.body.harga,
                 stock: req.body.stock,
             })
-            return new Response(res, 200, createItem)
+            const message = " item berhasil ditambahkan ! "
+            return new Response(res, 200, createItem, message)
         } catch(error) {
         next(error)
         }}
@@ -64,6 +65,44 @@ class ItemController {
     catch(error){
         next(error)
     }}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
+
+// method untuk update data item     
+async updateStockItem (req, res, next) {
+    try{
+
+        const code = req.body.code_item
+        const newstock = req.body.stock
+
+        const checkItem = await Item.findOne({
+            where: {
+                code_item: code
+            }
+        })
+
+        if(!checkItem){
+            res.send(JSON.stringify("id_item tidak ditemukan"))
+        }
+
+        if(checkItem){
+            res.send (checkItem)
+            const updateStock = await Item.update ({stock: newstock}, {
+                where: {
+                    code_item: code
+                }
+            })
+
+            const message = " stock berhasil ditambah"
+            return new Response(res, 200, updateStock, message )
+
+        }
+        
+    
+        
+}
+catch(error){
+    next(error)
+}}
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
     }

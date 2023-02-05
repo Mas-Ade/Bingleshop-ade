@@ -55,7 +55,7 @@ async registerUser (req, res, next) {
         }}
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = end of one
 
-// method untuk cek data user by id_user
+// method untuk Login
 async loginUser (req, res, next) {
         try {
             
@@ -87,7 +87,7 @@ async loginUser (req, res, next) {
                     attributes: ['nama_item', 'harga','stock'],
                 })
 
-            console.log('data Item : ', showItem)
+            // console.log('data Item : ', showItem)
             const message = " Selamat datang di bingleShop beta "
             return new Response (res, 200, showItem , message )
             }
@@ -137,9 +137,9 @@ async createCart (req, res, next) {
                 })
 
             if(saveCart){
-                const updateQtyItem = await Item.update ({qty_item: (CheckItem.qty_item - qty_item)}, {
+                const updateQtyItem = await Item.update ({stock: [CheckItem.stock - qty_item]}, {
                         where: {
-                            id_cart: id_cart
+                            id_item: CheckItem.id_item
                         }
                     })
                 }

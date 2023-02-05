@@ -1,5 +1,7 @@
 // import express module
 const express = require('express')
+// const bodyParser = require('body-parser')
+
 
 // inisialisasi app
 const app = express()
@@ -13,6 +15,9 @@ const bingleShop = require('./routers/bingleShop.router')
 
 // Middleware: request -> middleware -> controller/handler
 app.use(express.json()) // contoh fungsi express.json()
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+
 
 //Router
 app.use('/v1', userRouter)
@@ -34,6 +39,5 @@ app.use((err, req, res, next) => {
         error: error
     })
 })
-
 
 module.exports = app
